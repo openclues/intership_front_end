@@ -15,7 +15,6 @@ class _BaseScreenState extends State<BaseScreen> {
     HomeScreen(),
     HomeScreen(),
     HomeScreen(),
-    HomeScreen(),
   ];
   int index = 0;
   @override
@@ -26,8 +25,7 @@ class _BaseScreenState extends State<BaseScreen> {
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.map, title: 'Discovery'),
           TabItem(icon: Icons.add, title: 'Add'),
-          TabItem(icon: Icons.message, title: 'Message'),
-          TabItem(icon: Icons.people, title: 'Profile'),
+          TabItem(icon: Icons.settings, title: 'Settings'),
         ],
         onTap: (int i) {
           setState(() {

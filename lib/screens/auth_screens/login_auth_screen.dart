@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intership/providers/main_provider.dart';
 import 'package:intership/screens/auth_screens/signup_auth_screen.dart';
 import 'package:intership/screens/home_screen.dart';
+import 'package:intership/screens/loading_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/color.dart';
@@ -283,7 +284,7 @@ class _LoginFormState extends State<LoginForm> {
                                                 color: Colors.white))));
                                 Navigator.of(context).pushAndRemoveUntil(
                                     (MaterialPageRoute(builder: (context) {
-                                      return const HomeScreen();
+                                      return const LoadingPage();
                                     })),
                                     (route) => false);
                               } else {
@@ -300,7 +301,7 @@ class _LoginFormState extends State<LoginForm> {
                           });
                         }
                       },
-                      child: const Text("Login"),
+                      child:  Text("Login"),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: mainColor,
                         shape: RoundedRectangleBorder(
