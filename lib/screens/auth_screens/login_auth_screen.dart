@@ -1,7 +1,9 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intership/providers/main_provider.dart';
 import 'package:intership/screens/auth_screens/signup_auth_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/color.dart';
 
@@ -16,6 +18,8 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    var data = Provider.of<MainProvider>(context);
+
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -59,9 +63,15 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                 ],
               ),
             ),
-            SizedBox(
-              height: height * 0.3,
-              child: Image.asset('assets/logo.png'),
+            GestureDetector(
+              onTap: () {
+                data.login(password: "123", username: "islam");
+                // data.getStatusCode();
+              },
+              child: SizedBox(
+                height: height * 0.3,
+                child: Image.asset('assets/logo.png'),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -149,7 +159,6 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    // var data = Provider.of<CourseProvider>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
@@ -165,7 +174,7 @@ class _LoginFormState extends State<LoginForm> {
               },
               is_abstract: false,
               width: widget.width!,
-              hintText: "Enter username",
+              hintText: "Enter User ID",
               validator: (value) {
                 if (value!.isEmpty) {
                   return "Username cannot be empty";
