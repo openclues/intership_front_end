@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intership/providers/main_provider.dart';
 import 'package:intership/screens/auth_screens/signup_auth_screen.dart';
+import 'package:intership/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/color.dart';
@@ -161,6 +162,7 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    var data = Provider.of<MainProvider>(context);
 
     return Form(
       key: _formKey,
@@ -264,37 +266,38 @@ class _LoginFormState extends State<LoginForm> {
                                   ),
                                 );
                               });
-                          // await Future.delayed(const Duration(seconds: 2),
-                          //     () async {
-                          //   await data
-                          //       .login(username!, password!)
-                          //       .then((value) {
-                          //     if (value.statusCode == 200 ||
-                          //         value.statusCode == 201) {
-                          //       ScaffoldMessenger.of(context).showSnackBar(
-                          //           const SnackBar(
-                          //               backgroundColor: mainColor,
-                          //               content: Text("Login successful",
-                          //                   textAlign: TextAlign.center,
-                          //                   style: TextStyle(
-                          //                       color: Colors.white))));
-                          //       Navigator.of(context).pushAndRemoveUntil(
-                          //           (MaterialPageRoute(builder: (context) {
-                          //             return const LoadingPage();
-                          //           })),
-                          //           (route) => false);
-                          //     } else {
-                          //       Navigator.of(context).pop();
-                          //       ScaffoldMessenger.of(context).showSnackBar(
-                          //           const SnackBar(
-                          //               backgroundColor: mainColor,
-                          //               content: Text("Invalid Credentials",
-                          //                   textAlign: TextAlign.center,
-                          //                   style: TextStyle(
-                          //                       color: Colors.white))));
-                          //     }
-                          //   });
-                          // });
+                          await Future.delayed(const Duration(seconds: 1),
+                              () async {
+                            await data
+                                .login(username: username!, password: password!)
+                                .then((value) {
+                              if (value.statusCode == 200 ||
+                                  value.statusCode == 201) {
+                                print("Passed");
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        backgroundColor: mainColor,
+                                        content: Text("Login successful",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: Colors.white))));
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    (MaterialPageRoute(builder: (context) {
+                                      return const HomeScreen();
+                                    })),
+                                    (route) => false);
+                              } else {
+                                Navigator.of(context).pop();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        backgroundColor: mainColor,
+                                        content: Text("Invalid Credentials",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: Colors.white))));
+                              }
+                            });
+                          });
                         }
                       },
                       child: const Text("Login"),
